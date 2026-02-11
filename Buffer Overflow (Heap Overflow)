@@ -1,0 +1,32 @@
+1] ❌ What’s wrong?
+
+int length = (int)pbuf->in_avail();
+buffer = (char*) malloc(length+1);
+ifs.read(buffer, pbuf->in_avail());
+
+The Attacker Controls:
+filename → file → file size → pbuf->in_avail()
+
+The program:
+
+-> Allocates memory based on in_avail()
+
+-> Reads again using in_avail() which can change
+
+-> Never checks how many bytes were actually read
+
+This can cause:
+Heap overflow → overwrite heap metadata → code execution
+
+🔥 Attack scenario
+
+An attacker creates a specially crafted file with:
+
+Fake EOF markers
+
+Or delayed I/O behavior
+So that in_avail() changes between calls
+
+This lets the attacker overwrite memory beyond buffer.
+
+➡️ This can lead to Remote Code Execution (RCE)
