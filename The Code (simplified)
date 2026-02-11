@@ -1,0 +1,10 @@
+std::ifstream ifs(filename);
+std::streambuf* pbuf = ifs.rdbuf();
+int length = (int)pbuf->in_avail();
+buffer = (char*) malloc(length+1);
+ifs.read(buffer,pbuf->in_avail());
+printf("%s\n",buffer[0]);
+
+This code tries to read a file into memory and print it.
+
+Unfortunately, it contains multiple critical vulnerabilities.
