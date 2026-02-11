@@ -1,0 +1,13 @@
+The user controls:
+code:
+argv[1] → filename
+
+
+So attackers can do:
+
+./app /etc/passwd
+./app /etc/shadow
+./app C:\Windows\System32\config\SAM
+
+➡️ Credential theft
+➡️ System takeover
