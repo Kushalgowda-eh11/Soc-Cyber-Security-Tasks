@@ -1,0 +1,22 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+int main (int argc, char** argv) {
+	std::string filename;
+	char* buffer;
+	if (argc > 1)
+		filename = argv[1];
+	else {
+		printf("No filename provided");
+		exit(0);
+	}
+	std::ifstream ifs(filename);
+	if (ifs.good()) {
+		std::streambuf* pbuf = ifs.rdbuf();
+		int length = (int)pbuf->in_avail();
+		buffer = (char*) malloc(length+1);
+		ifs.read(buffer,pbuf->in_avail());
+		printf("%s\n",buffer[0]);
+	}
+}
