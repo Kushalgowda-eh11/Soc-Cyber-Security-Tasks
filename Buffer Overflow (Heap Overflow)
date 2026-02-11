@@ -1,21 +1,21 @@
 1] ❌ What’s wrong?
-
+code:
 int length = (int)pbuf->in_avail();
 buffer = (char*) malloc(length+1);
 ifs.read(buffer, pbuf->in_avail());
 
 The Attacker Controls:
+code:
 filename → file → file size → pbuf->in_avail()
 
 The program:
 
 -> Allocates memory based on in_avail()
-
 -> Reads again using in_avail() which can change
-
 -> Never checks how many bytes were actually read
 
 This can cause:
+code:
 Heap overflow → overwrite heap metadata → code execution
 
 🔥 Attack scenario
