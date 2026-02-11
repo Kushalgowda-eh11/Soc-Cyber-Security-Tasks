@@ -1,0 +1,24 @@
+buffer = (char*) malloc(length+1);
+ifs.read(buffer, pbuf->in_avail());
+printf("%s\n", buffer[0]);
+
+They allocate +1 byte, but they never add:
+buffer[length] = '\0';
+
+So printf keeps reading memory past the buffer until it finds a \0.
+
+🔥 What does this leak?
+
+Passwords
+
+Pointers
+
+Stack data
+
+Heap addresses
+
+This is called:
+
+Information Disclosure Vulnerability
+
+This helps attackers bypass ASLR and exploit the system.
